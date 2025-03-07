@@ -3,14 +3,14 @@
 
 // target interface
 class Shape {
-   public:
+  public:
     virtual ~Shape() = default;
     virtual void draw(int x, int y, int width, int height) const = 0;
 };
 
 // legacy class
 class LegacyRectangle {
-   public:
+  public:
     void draw(int x1, int y1, int x2, int y2) {
         std::cout << "LegacyRectangle: draw(" << x1 << ", " << y1 << ", " << x2 << ", " << y2 << ")" << std::endl;
     }
@@ -18,7 +18,7 @@ class LegacyRectangle {
 
 // object adapter
 class RectangleAdapter : public Shape {
-   public:
+  public:
     explicit RectangleAdapter(std::shared_ptr<LegacyRectangle> legacy) : legacy_(legacy) {}
 
     void draw(int x, int y, int width, int height) const override {
@@ -27,7 +27,7 @@ class RectangleAdapter : public Shape {
         legacy_->draw(x, y, x2, y2);
     }
 
-   private:
+  private:
     std::shared_ptr<LegacyRectangle> legacy_;
 };
 

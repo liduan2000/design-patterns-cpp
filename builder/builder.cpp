@@ -4,7 +4,7 @@
 
 // product
 class House {
-   public:
+  public:
     void setWalls(const std::string& walls) { walls_ = walls; }
     void setDoors(const std::string& doors) { doors_ = doors; }
     void setWindows(const std::string& windows) { windows_ = windows; }
@@ -12,7 +12,7 @@ class House {
         std::cout << "House with " << walls_ << ", " << doors_ << ", and " << windows_ << std::endl;
     }
 
-   private:
+  private:
     std::string walls_;
     std::string doors_;
     std::string windows_;
@@ -20,7 +20,7 @@ class House {
 
 // builder interface
 class HouseBuilder {
-   public:
+  public:
     virtual ~HouseBuilder() = default;
     virtual void buildWalls() = 0;
     virtual void buildDoors() = 0;
@@ -30,7 +30,7 @@ class HouseBuilder {
 
 // wooden house builder
 class WoodenHouseBuilder : public HouseBuilder {
-   public:
+  public:
     WoodenHouseBuilder() { house_ = std::make_shared<House>(); }
 
     void buildWalls() override { house_->setWalls("Wooden Walls"); }
@@ -38,13 +38,13 @@ class WoodenHouseBuilder : public HouseBuilder {
     void buildWindows() override { house_->setWindows("Wooden Windows"); }
     std::shared_ptr<House> getHouse() override { return house_; };
 
-   private:
+  private:
     std::shared_ptr<House> house_;
 };
 
 // rocky house builder
 class RockyHouseBuilder : public HouseBuilder {
-   public:
+  public:
     RockyHouseBuilder() { house_ = std::make_shared<House>(); }
 
     void buildWalls() override { house_->setWalls("Rocky Walls"); }
@@ -52,13 +52,13 @@ class RockyHouseBuilder : public HouseBuilder {
     void buildWindows() override { house_->setWindows("Rocky Windows"); }
     std::shared_ptr<House> getHouse() override { return house_; };
 
-   private:
+  private:
     std::shared_ptr<House> house_;
 };
 
 // director
 class HouseDirector {
-   public:
+  public:
     HouseDirector(std::shared_ptr<HouseBuilder> builder = nullptr) : builder_(builder) {}
 
     void setBuilder(std::shared_ptr<HouseBuilder> builder) { builder_ = builder; }
@@ -71,7 +71,7 @@ class HouseDirector {
 
     std::shared_ptr<House> getHouse() { return builder_->getHouse(); }
 
-   private:
+  private:
     std::shared_ptr<HouseBuilder> builder_;
 };
 

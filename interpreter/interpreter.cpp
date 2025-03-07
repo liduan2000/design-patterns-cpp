@@ -5,36 +5,36 @@
 
 // abstract expression
 class Expression {
-   public:
+  public:
     virtual ~Expression() = default;
     virtual int interpret(const std::unordered_map<std::string, int>& context) const = 0;
 };
 
 // terminal expression
 class Variable : public Expression {
-   public:
+  public:
     explicit Variable(const std::string& name) : name_(name) {}
 
     int interpret(const std::unordered_map<std::string, int>& context) const override { return context.at(name_); }
 
-   private:
+  private:
     std::string name_;
 };
 
 // terminal expression
 class Constant : public Expression {
-   public:
+  public:
     explicit Constant(int value) : value_(value) {}
 
     int interpret(const std::unordered_map<std::string, int>& context) const override { return value_; }
 
-   private:
+  private:
     int value_;
 };
 
 // non-terminal expression
 class Add : public Expression {
-   public:
+  public:
     Add(std::shared_ptr<Expression> left, std::shared_ptr<Expression> right)
         : left_(std::move(left)), right_(std::move(right)) {}
 
@@ -42,14 +42,14 @@ class Add : public Expression {
         return left_->interpret(context) + right_->interpret(context);
     }
 
-   private:
+  private:
     std::shared_ptr<Expression> left_;
     std::shared_ptr<Expression> right_;
 };
 
 // non-terminal expression
 class Subtract : public Expression {
-   public:
+  public:
     Subtract(std::shared_ptr<Expression> left, std::shared_ptr<Expression> right)
         : left_(std::move(left)), right_(std::move(right)) {}
 
@@ -57,7 +57,7 @@ class Subtract : public Expression {
         return left_->interpret(context) - right_->interpret(context);
     }
 
-   private:
+  private:
     std::shared_ptr<Expression> left_;
     std::shared_ptr<Expression> right_;
 };

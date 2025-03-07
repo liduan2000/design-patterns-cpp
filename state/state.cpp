@@ -5,31 +5,31 @@ class State;
 
 // context
 class Light {
-   public:
+  public:
     Light();
     void setState(std::shared_ptr<State> state);
     void pressSwitch();
 
-   private:
+  private:
     std::shared_ptr<State> state_;
 };
 
 // state interface
 class State {
-   public:
+  public:
     virtual ~State() = default;
     virtual void handle(Light& light) = 0;
 };
 
 // concrete state
 class OnState : public State {
-   public:
+  public:
     void handle(Light& light) override;
 };
 
 // concrete state
 class OffState : public State {
-   public:
+  public:
     void handle(Light& light) override;
 };
 

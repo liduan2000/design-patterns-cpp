@@ -3,37 +3,37 @@
 
 // implementation interface
 class Color {
-   public:
+  public:
     virtual ~Color() = default;
     virtual void applyColor() const = 0;
 };
 
 // concrete implementation color: red
 class Red : public Color {
-   public:
+  public:
     void applyColor() const override { std::cout << "Applying red color" << std::endl; }
 };
 
 // concrete implementation color: blue
 class Blue : public Color {
-   public:
+  public:
     void applyColor() const override { std::cout << "Applying blue color" << std::endl; }
 };
 
 // abstract class
 class Shape {
-   public:
+  public:
     explicit Shape(std::shared_ptr<Color> color) : color_(std::move(color)) {}
     virtual ~Shape() = default;
     virtual void draw() const = 0;
 
-   protected:
+  protected:
     std::shared_ptr<Color> color_;
 };
 
 // extended abstraction shape: circle
 class Circle : public Shape {
-   public:
+  public:
     explicit Circle(std::shared_ptr<Color> color) : Shape(std::move(color)) {}
     void draw() const override {
         std::cout << "Drawing circle and ";
@@ -43,7 +43,7 @@ class Circle : public Shape {
 
 // extended abstraction shape: rectangle
 class Rectangle : public Shape {
-   public:
+  public:
     explicit Rectangle(std::shared_ptr<Color> color) : Shape(std::move(color)) {}
     void draw() const override {
         std::cout << "Drawing rectangle and ";

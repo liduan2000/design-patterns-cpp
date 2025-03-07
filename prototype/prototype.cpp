@@ -6,7 +6,7 @@ enum class ShapeType { CIRCLE, RECTANGLE };
 
 // prototype class: Shape
 class Shape {
-   public:
+  public:
     virtual ~Shape() = default;
     virtual std::unique_ptr<Shape> clone() const = 0;
     virtual void draw() const = 0;
@@ -14,45 +14,43 @@ class Shape {
 
 // concrete prototype: Circle
 class Circle : public Shape {
-   public:
+  public:
     explicit Circle(double radius) : radius_(radius) {}
     std::unique_ptr<Shape> clone() const override { return std::make_unique<Circle>(*this); }
     void draw() const override { std::cout << "Drawing a circle with radius " << radius_ << std::endl; }
 
-   private:
+  private:
     double radius_;
 };
 
 // concrete prototype: Rectangle
 class Rectangle : public Shape {
-   public:
+  public:
     Rectangle(double width, double height) : width_(width), height_(height) {}
     std::unique_ptr<Shape> clone() const override { return std::make_unique<Rectangle>(*this); }
     void draw() const override {
         std::cout << "Drawing a rectangle with width " << width_ << " and height " << height_ << std::endl;
     }
 
-   private:
+  private:
     double width_;
     double height_;
 };
 
 // prototype manager
 class ShapeManager {
-   public:
+  public:
     void registerPrototype(ShapeType type, std::unique_ptr<Shape> prototype) {
         prototypes_[type] = std::move(prototype);
     }
 
     std::unique_ptr<Shape> createShape(ShapeType type) const {
         auto it = prototypes_.find(type);
-        if (it != prototypes_.end()) {
-            return it->second->clone();
-        }
+        if (it != prototypes_.end()) { return it->second->clone(); }
         return nullptr;
     }
 
-   private:
+  private:
     std::unordered_map<ShapeType, std::unique_ptr<Shape>> prototypes_;
 };
 

@@ -5,14 +5,14 @@
 
 // observer interface
 class Observer {
-   public:
+  public:
     virtual ~Observer() = default;
     virtual void update(const std::string& message) const = 0;
 };
 
 // abstract subject
 class Subject {
-   public:
+  public:
     virtual ~Subject() = default;
     virtual void attach(Observer* observer) = 0;
     virtual void detach(Observer* observer) = 0;
@@ -21,7 +21,7 @@ class Subject {
 
 // concrete subject
 class ConcreteSubject : public Subject {
-   public:
+  public:
     void attach(Observer* observer) override { observers_.push_back(observer); }
 
     void detach(Observer* observer) override {
@@ -29,9 +29,7 @@ class ConcreteSubject : public Subject {
     }
 
     void notify() const override {
-        for (Observer* observer : observers_) {
-            observer->update(state_);
-        }
+        for (Observer* observer : observers_) { observer->update(state_); }
     }
 
     std::string getState() const { return state_; }
@@ -41,21 +39,21 @@ class ConcreteSubject : public Subject {
         notify();
     }
 
-   private:
+  private:
     std::string state_;
     std::vector<Observer*> observers_;
 };
 
 // concrete observer
 class ConcreteObserver : public Observer {
-   public:
+  public:
     ConcreteObserver(const std::string& name) : name_(name) {}
 
     void update(const std::string& message) const {
         std::cout << "Observer " << name_ << " received message: " << message << std::endl;
     }
 
-   private:
+  private:
     std::string name_;
 };
 

@@ -2,24 +2,24 @@
 #include <memory>
 
 class Button {
-   public:
+  public:
     virtual ~Button() = default;
     virtual void render() = 0;
 };
 
 class WindowsButton : public Button {
-   public:
+  public:
     void render() override { std::cout << "Windows render" << std::endl; }
 };
 
 class MacbookButton : public Button {
-   public:
+  public:
     void render() override { std::cout << "Macbook render" << std::endl; }
 };
 
 // allow subclasses to determine the type of instantiated object
 class Dialog {
-   public:
+  public:
     virtual ~Dialog() = default;
     virtual std::unique_ptr<Button> createButton() = 0;
 
@@ -30,12 +30,12 @@ class Dialog {
 };
 
 class WindowsDialog : public Dialog {
-   public:
+  public:
     std::unique_ptr<Button> createButton() override { return std::make_unique<WindowsButton>(); }
 };
 
 class MacbookDialog : public Dialog {
-   public:
+  public:
     std::unique_ptr<Button> createButton() override { return std::make_unique<MacbookButton>(); }
 };
 

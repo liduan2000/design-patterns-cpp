@@ -3,40 +3,40 @@
 
 // strategy interface
 class PaymentStrategy {
-   public:
+  public:
     virtual ~PaymentStrategy() = default;
     virtual void pay(double amount) const = 0;
 };
 
 // concrete strategy
 class CreditCardPayment : public PaymentStrategy {
-   public:
+  public:
     explicit CreditCardPayment(const std::string& cardNumber) : cardNumber_(cardNumber) {}
 
     void pay(double amount) const override {
         std::cout << "Paid " << amount << " using Credit Card: " << cardNumber_ << std::endl;
     }
 
-   private:
+  private:
     std::string cardNumber_;
 };
 
 // concrete strategy
 class AlipayPayment : public PaymentStrategy {
-   public:
+  public:
     explicit AlipayPayment(const std::string& account) : account_(account) {}
 
     void pay(double amount) const override {
         std::cout << "Paid " << amount << " using Alipay account: " << account_ << std::endl;
     }
 
-   private:
+  private:
     std::string account_;
 };
 
 // context
 class PaymentContext {
-   public:
+  public:
     void setPayment(std::unique_ptr<PaymentStrategy> payment) { payment_ = std::move(payment); }
 
     void executePayment(double amount) const {
@@ -47,7 +47,7 @@ class PaymentContext {
         }
     }
 
-   private:
+  private:
     std::unique_ptr<PaymentStrategy> payment_;
 };
 

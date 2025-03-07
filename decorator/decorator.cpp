@@ -4,48 +4,48 @@
 
 // component interface
 class Component {
-   public:
+  public:
     virtual ~Component() = default;
     virtual std::string render() const = 0;
 };
 
 // concrete component
 class Text : public Component {
-   public:
+  public:
     explicit Text(const std::string& content) : content_(content) {}
     std::string render() const override { return content_; }
 
-   private:
+  private:
     std::string content_;
 };
 
 // decorator
 class Decorator : public Component {
-   public:
+  public:
     explicit Decorator(std::shared_ptr<Component> component) : component_(std::move(component)) {}
     std::string render() const override { return component_->render(); }
 
-   protected:
+  protected:
     std::shared_ptr<Component> component_;
 };
 
 // concrete decorator: bold
 class BoldDecorator : public Decorator {
-   public:
+  public:
     explicit BoldDecorator(std::shared_ptr<Component> component) : Decorator(std::move(component)) {}
     std::string render() const override { return "<b>" + component_->render() + "</b>"; }
 };
 
 // concrete decorator: italic
 class ItalicDecorator : public Decorator {
-   public:
+  public:
     explicit ItalicDecorator(std::shared_ptr<Component> component) : Decorator(std::move(component)) {}
     std::string render() const override { return "<i>" + component_->render() + "</i>"; }
 };
 
 // concrete decorator: underline
 class UnderlineDecorator : public Decorator {
-   public:
+  public:
     explicit UnderlineDecorator(std::shared_ptr<Component> component) : Decorator(std::move(component)) {}
     std::string render() const override { return "<u>" + component_->render() + "</u>"; }
 };

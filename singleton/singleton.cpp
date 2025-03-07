@@ -3,7 +3,7 @@
 #include <vector>
 
 class Logger {
-   public:
+  public:
     Logger(Logger const&) = delete;
     Logger& operator=(Logger const&) = delete;
 
@@ -14,14 +14,12 @@ class Logger {
 
     void printLogs() {
         std::cout << "printing logs:" << std::endl;
-        for (auto& log : logs_) {
-            std::cout << log << std::endl;
-        }
+        for (auto& log : logs_) { std::cout << log << std::endl; }
     }
 
     void addLog(std::string s) { logs_.emplace_back(s); }
 
-   private:
+  private:
     Logger() { std::cout << "Logger created" << std::endl; }
 
     ~Logger() { std::cout << "Logger destroyed" << std::endl; }

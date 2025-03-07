@@ -2,7 +2,7 @@
 
 // abstract class
 class Beverage {
-   public:
+  public:
     virtual ~Beverage() = default;
 
     // template method
@@ -10,12 +10,10 @@ class Beverage {
         boilWater();
         brew();
         pourInCup();
-        if (customerWantsCondiments()) {
-            addCondiments();
-        }
+        if (customerWantsCondiments()) { addCondiments(); }
     }
 
-   protected:
+  protected:
     void boilWater() { std::cout << "Boiling water" << std::endl; }
 
     void pourInCup() { std::cout << "Pouring into cup" << std::endl; }
@@ -30,7 +28,7 @@ class Beverage {
 
 // concrete class
 class Tea : public Beverage {
-   protected:
+  protected:
     void brew() override { std::cout << "Steeping the tea" << std::endl; }
 
     void addCondiments() override { std::cout << "Adding lemon" << std::endl; }
@@ -38,17 +36,17 @@ class Tea : public Beverage {
 
 // concrete class
 class Coffee : public Beverage {
-   public:
+  public:
     explicit Coffee(bool wantsCondiments) : wantsCondiments_(wantsCondiments) {}
 
-   protected:
+  protected:
     void brew() override { std::cout << "Dripping coffee through filter" << std::endl; }
 
     void addCondiments() override { std::cout << "Adding sugar and milk" << std::endl; }
 
     bool customerWantsCondiments() override { return wantsCondiments_; }
 
-   private:
+  private:
     bool wantsCondiments_;
 };
 

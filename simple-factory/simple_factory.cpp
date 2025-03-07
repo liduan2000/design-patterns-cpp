@@ -2,18 +2,18 @@
 #include <memory>
 
 class Button {
-   public:
+  public:
     virtual ~Button() = default;
     virtual void render() = 0;
 };
 
 class WindowsButton : public Button {
-   public:
+  public:
     void render() override { std::cout << "Windows render" << std::endl; }
 };
 
 class MacbookButton : public Button {
-   public:
+  public:
     void render() override { std::cout << "Macbook render" << std::endl; }
 };
 
@@ -21,7 +21,7 @@ enum class ButtonType { WINDOWS, MACBOOK };
 
 // button factory is responsible for creating button objects
 class ButtonFactory {
-   public:
+  public:
     static std::unique_ptr<Button> createButton(ButtonType type) {
         if (type == ButtonType::WINDOWS) {
             return std::make_unique<WindowsButton>();

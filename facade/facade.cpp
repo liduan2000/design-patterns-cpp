@@ -3,7 +3,7 @@
 
 // subsystem
 class AudioPlayer {
-   public:
+  public:
     void playAudio(const std::string& audio) const { std::cout << "Playing audio: " << audio << std::endl; }
 
     void stopAudio() const { std::cout << "Stopping audio" << std::endl; }
@@ -11,7 +11,7 @@ class AudioPlayer {
 
 // subsystem
 class VideoPlayer {
-   public:
+  public:
     void playVideo(const std::string& video) const { std::cout << "Playing video: " << video << std::endl; }
 
     void stopVideo() const { std::cout << "Stopping video" << std::endl; }
@@ -19,7 +19,7 @@ class VideoPlayer {
 
 // subsystem
 class LightController {
-   public:
+  public:
     void dimLights() const { std::cout << "Dimming lights" << std::endl; }
 
     void brightenLights() const { std::cout << "Brightening lights" << std::endl; }
@@ -27,7 +27,7 @@ class LightController {
 
 // facade
 class MultimediaFacade {
-   public:
+  public:
     void startMovie(const std::string& audio, const std::string& video) const {
         std::cout << "Starting movie..." << std::endl;
         lightController_.dimLights();
@@ -42,7 +42,7 @@ class MultimediaFacade {
         lightController_.brightenLights();
     }
 
-   private:
+  private:
     AudioPlayer audioPlayer_;
     VideoPlayer videoPlayer_;
     LightController lightController_;

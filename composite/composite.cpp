@@ -5,37 +5,35 @@
 
 // abstract component
 class FileSystemComponent {
-   public:
+  public:
     virtual ~FileSystemComponent() = default;
     virtual void display(int indent = 0) const = 0;
 };
 
 // leaf class
 class File : public FileSystemComponent {
-   public:
+  public:
     explicit File(const std::string& name) : name_(name) {}
 
     void display(int indent = 0) const override { std::cout << std::string(indent, ' ') << "- " << name_ << std::endl; }
 
-   private:
+  private:
     std::string name_;
 };
 
 // composite class
 class Folder : public FileSystemComponent {
-   public:
+  public:
     explicit Folder(const std::string& name) : name_(name) {}
 
     void display(int indent = 0) const override {
         std::cout << std::string(indent, ' ') << "+ " << name_ << std::endl;
-        for (const auto& child : children_) {
-            child->display(indent + 2);
-        }
+        for (const auto& child : children_) { child->display(indent + 2); }
     }
 
     void add(const std::shared_ptr<FileSystemComponent>& component) { children_.push_back(component); }
 
-   private:
+  private:
     std::string name_;
     std::vector<std::shared_ptr<FileSystemComponent>> children_;
 };

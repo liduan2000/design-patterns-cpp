@@ -4,16 +4,16 @@
 #include <vector>
 
 class Memento {
-   public:
+  public:
     explicit Memento(const std::string& state) : state_(state) {}
     std::string getState() const { return state_; }
 
-   private:
+  private:
     std::string state_;
 };
 
 class Originator {
-   public:
+  public:
     void setState(const std::string& state) {
         this->state_ = state;
         std::cout << "State set to: " << state << std::endl;
@@ -28,12 +28,12 @@ class Originator {
         std::cout << "Restored state to: " << state_ << std::endl;
     }
 
-   private:
+  private:
     std::string state_;
 };
 
 class Caretaker {
-   public:
+  public:
     explicit Caretaker(Originator& originator) : originator_(originator) {}
 
     void save() { mementos_.emplace_back(originator_.saveToMemento()); }
@@ -47,7 +47,7 @@ class Caretaker {
         mementos_.pop_back();
     }
 
-   private:
+  private:
     std::vector<std::unique_ptr<Memento>> mementos_;
     Originator& originator_;
 };

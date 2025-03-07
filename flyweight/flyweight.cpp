@@ -9,14 +9,14 @@
 
 // flyweight interface
 class Flyweight {
-   public:
+  public:
     virtual ~Flyweight() = default;
     virtual void render(int x, int y) const = 0;
 };
 
 // concrete flyweight
 class Character : public Flyweight {
-   public:
+  public:
     Character(char symbol, const std::string& font, int size) : symbol_(symbol), font_(font), size_(size) {}
 
     void render(int x, int y) const override {
@@ -24,7 +24,7 @@ class Character : public Flyweight {
                   << "' and size " << size_ << std::endl;
     }
 
-   private:
+  private:
     char symbol_;
     std::string font_;
     int size_;
@@ -32,7 +32,7 @@ class Character : public Flyweight {
 
 // flyweight factory
 class FlyweightFactory {
-   public:
+  public:
     std::shared_ptr<Flyweight> getFlyweight(char symbol, const std::string& font, int size) {
         std::string key = getKey(symbol, font, size);
         if (flyweights_.find(key) == flyweights_.end()) {
@@ -46,7 +46,7 @@ class FlyweightFactory {
 
     size_t getFlyweightCount() const { return flyweights_.size(); }
 
-   private:
+  private:
     std::unordered_map<std::string, std::shared_ptr<Flyweight>> flyweights_;
 
     std::string getKey(char symbol, const std::string& font, int size) const {

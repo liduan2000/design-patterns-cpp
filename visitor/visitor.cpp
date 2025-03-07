@@ -10,7 +10,7 @@ class Rectangle;
 
 // abstract visitor
 class Visitor {
-   public:
+  public:
     virtual ~Visitor() = default;
     virtual void visitCircle(Circle* circle) = 0;
     virtual void visitRectangle(Rectangle* rectangle) = 0;
@@ -18,27 +18,27 @@ class Visitor {
 
 // element interface
 class Shape {
-   public:
+  public:
     virtual ~Shape() = default;
     virtual void accept(Visitor* visitor) = 0;
 };
 
 // concrete element
 class Circle : public Shape {
-   public:
+  public:
     explicit Circle(double radius) : radius_(radius) {}
 
     double getRadius() { return radius_; }
 
     void accept(Visitor* visitor) override { visitor->visitCircle(this); }
 
-   private:
+  private:
     double radius_;
 };
 
 // concrete element
 class Rectangle : public Shape {
-   public:
+  public:
     Rectangle(double width, double height) : width_(width), height_(height) {}
 
     double getWidth() { return width_; }
@@ -47,13 +47,13 @@ class Rectangle : public Shape {
 
     void accept(Visitor* visitor) { visitor->visitRectangle(this); }
 
-   private:
+  private:
     double width_, height_;
 };
 
 // concrete visitor
 class AreaCalculator : public Visitor {
-   public:
+  public:
     void visitCircle(Circle* circle) override {
         double area = PI * std::pow(circle->getRadius(), 2);
         std::cout << "Circle Area: " << area << std::endl;
@@ -67,7 +67,7 @@ class AreaCalculator : public Visitor {
 
 // concrete visitor
 class ShapeDrawer : public Visitor {
-   public:
+  public:
     void visitCircle(Circle* circle) override {
         std::cout << "Drawing a Circle with radius " << circle->getRadius() << std::endl;
     }

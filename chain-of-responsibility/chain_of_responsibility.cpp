@@ -6,7 +6,7 @@ enum class LogLevel { INFO, DEBUG, ERROR };
 
 // handler
 class Logger {
-   public:
+  public:
     Logger() : nextLogger_(nullptr) {}
 
     virtual ~Logger() = default;
@@ -14,18 +14,16 @@ class Logger {
     void setNextLogger(std::shared_ptr<Logger> nextLogger) { nextLogger_ = nextLogger; }
 
     virtual void logMessage(LogLevel level, const std::string message) const {
-        if (nextLogger_ != nullptr) {
-            nextLogger_->logMessage(level, message);
-        }
+        if (nextLogger_ != nullptr) { nextLogger_->logMessage(level, message); }
     }
 
-   private:
+  private:
     std::shared_ptr<Logger> nextLogger_;
 };
 
 // concrete handler
 class InfoLogger : public Logger {
-   public:
+  public:
     void logMessage(LogLevel level, const std::string message) const override {
         if (level == LogLevel::INFO) {
             std::cout << "[INFO] " << message << std::endl;
@@ -37,7 +35,7 @@ class InfoLogger : public Logger {
 
 // concrete handler
 class DebugLogger : public Logger {
-   public:
+  public:
     void logMessage(LogLevel level, const std::string message) const override {
         if (level == LogLevel::DEBUG) {
             std::cout << "[DEBUG] " << message << std::endl;
@@ -49,7 +47,7 @@ class DebugLogger : public Logger {
 
 // concrete handler
 class ErrorLogger : public Logger {
-   public:
+  public:
     void logMessage(LogLevel level, const std::string message) const override {
         if (level == LogLevel::ERROR) {
             std::cout << "[ERROR] " << message << std::endl;

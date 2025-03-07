@@ -4,7 +4,7 @@
 
 // receiver
 class Light {
-   public:
+  public:
     void on() const { std::cout << "Light ON" << std::endl; }
 
     void off() const { std::cout << "Light OFF" << std::endl; }
@@ -12,43 +12,43 @@ class Light {
 
 // command interface
 class Command {
-   public:
+  public:
     virtual ~Command() = default;
     virtual void execute() const = 0;
 };
 
 // concrete command
 class LightOnCommand : public Command {
-   public:
+  public:
     explicit LightOnCommand(std::shared_ptr<Light> light) : light_(light) {}
 
     void execute() const override { light_->on(); }
 
-   private:
+  private:
     std::shared_ptr<Light> light_;
 };
 
 // concrete command
 class LightOffCommand : public Command {
-   public:
+  public:
     explicit LightOffCommand(std::shared_ptr<Light> light) : light_(light) {}
 
     void execute() const override { light_->off(); }
 
-   private:
+  private:
     std::shared_ptr<Light> light_;
 };
 
 // invoker
 class RemoteControl {
-   public:
+  public:
     void setCommand(std::shared_ptr<Command> command) { command_ = command; }
 
     void pressButton() {
         if (command_) command_->execute();
     }
 
-   private:
+  private:
     std::shared_ptr<Command> command_;
 };
 

@@ -6,42 +6,40 @@ class Colleague;
 
 // abstract mediator
 class Mediator {
-   public:
+  public:
     virtual ~Mediator() = default;
     virtual void sendMessage(const std::string& message, Colleague* sender) = 0;
 };
 
 // abstract colleague
 class Colleague {
-   public:
+  public:
     explicit Colleague(Mediator* mediator) : mediator_(mediator) {}
     virtual ~Colleague() = default;
     virtual void receiveMessage(const std::string& message) = 0;
 
-   protected:
+  protected:
     Mediator* mediator_;
 };
 
 // concrete mediator
 class ChatMediator : public Mediator {
-   public:
+  public:
     void addColleague(Colleague* colleague) { colleagues_.push_back(colleague); }
 
     void sendMessage(const std::string& message, Colleague* sender) override {
         for (auto& colleague : colleagues_) {
-            if (colleague != sender) {
-                colleague->receiveMessage(message);
-            }
+            if (colleague != sender) { colleague->receiveMessage(message); }
         }
     }
 
-   private:
+  private:
     std::vector<Colleague*> colleagues_;
 };
 
 // concrete colleague
 class User : public Colleague {
-   public:
+  public:
     User(const std::string& name, Mediator* mediator) : Colleague(mediator), name_(name) {}
 
     void sendMessage(const std::string& message) {
@@ -53,7 +51,7 @@ class User : public Colleague {
         std::cout << name_ << " receives: " << message << std::endl;
     }
 
-   private:
+  private:
     std::string name_;
 };
 
